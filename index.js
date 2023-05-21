@@ -12,6 +12,30 @@ const { state, saveState } = useSingleFileAuthState("./login.json");
 const fs = require('fs')
 const axios = require('axios')
 
+//Bagian Koding ChatGPT
+const { Configuration, OpenAIApi } = require("openai");
+const configuration = new Configuration({
+    apiKey: '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',
+});
+const openai = new OpenAIApi(configuration);
+
+//Fungsi OpenAI ChatGPT untuk Mendapatkan Respon
+async function generateResponse(text) {
+	var questions = text+"\n## Instructions \nUse the cute anime girl tsundere tone of voice."
+    const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: `## Instructions \nUse the cute anime girl tsundere tone of voice.\n${text}`,
+        temperature: 0.3,
+        max_tokens: 2000,
+        top_p: 1.0,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+    });
+    console.log(response.data.choices[0].text)
+    return response.data.choices[0].text;
+
+}
+
 //Main Functions of Mirai WA Bot
 async function connectToWhatsApp() {
 
@@ -100,6 +124,10 @@ async function connectToWhatsApp() {
 ✦ *FUN* ✦
 > ❀ ${prefix}stress <character> <country>
 > ❀ ${prefix}stress2 <character>
+
+✦ *AI* ✦
+> ❀ ${prefix}ai 
+
                                     `
                                 },
                                 { quoted: messages[0] },
@@ -194,6 +222,18 @@ Tak perlu dikatakan, gue TIDAK menyesal sama sekali. Dia adalah perwujudan dari 
                                 },
                                 2000
                             );
+                        }
+                            break;
+
+			 //*AI* ✦
+			case 'ai':{
+			    const result = await generateResponse(incomingMessages);
+                            await sock.sendMessage(
+                            	senderNumber,
+                            	{ text: result + "\n\n" },
+                            	{ quoted: messages[0] },
+                            2000
+                        );
                         }
                             break;
                     
