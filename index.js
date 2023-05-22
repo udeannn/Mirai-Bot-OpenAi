@@ -15,7 +15,7 @@ const axios = require('axios')
 //Bagian Koding ChatGPT
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: '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',
 });
 const openai = new OpenAIApi(configuration);
 
@@ -31,7 +31,7 @@ async function generateResponse(text) {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
-    console.log(response.data.choices[0].text)
+    //console.log(response.data.choices[0].text)
     return response.data.choices[0].text;
 
 }
@@ -76,11 +76,12 @@ async function connectToWhatsApp() {
                     incomingMessages = messages[0].message.extendedTextMessage.text;
                 }
                 incomingMessages = incomingMessages.toLowerCase();
+		console.log(messages[0]);
                 
                 //Get the sender number name
                 const senderName = messages[0].pushName;
 
-                //Get Message Info from Group or Not
+                //Get Message Info from Group or No
                 let isMessageFromGroup = senderNumber.includes("@g.us");
                 let senderNumberparticipant = ''
                 if (isMessageFromGroup) {
@@ -126,7 +127,7 @@ async function connectToWhatsApp() {
 > ❀ ${prefix}stress2 <character>
 
 ✦ *AI* ✦
-> ❀ ${prefix}ai 
+> Silakan kirim pesan dengan mengandung kata "mirai" di dalam pesan tersebut 
 
                                     `
                                 },
@@ -226,16 +227,16 @@ Tak perlu dikatakan, gue TIDAK menyesal sama sekali. Dia adalah perwujudan dari 
                             break;
 
 			 //*AI* ✦
-			case 'ai':{
-			    const result = await generateResponse(incomingMessages);
-                            await sock.sendMessage(
-                            	senderNumber,
-                            	{ text: result + "\n\n" },
-                            	{ quoted: messages[0] },
-                            2000
-                        );
-                        }
-                            break;
+			//case 'ai':{
+			    //const result = await generateResponse(incomingMessages);
+                            //await sock.sendMessage(
+                            	//senderNumber,
+                            	//{ text: result + "\n\n" },
+                            	//{ quoted: messages[0] },
+                            //2000
+                        //);
+                        //}
+                            //break;
                     
                         default:
                             // await sock.sendMessage(
@@ -244,6 +245,16 @@ Tak perlu dikatakan, gue TIDAK menyesal sama sekali. Dia adalah perwujudan dari 
                             //     { quoted: messages[0] },
                             //     2000
                             // );
+			if (incomingMessages.includes('mirai')) {
+			    incomingMessages = incomingMessages.replace("mirai", "");
+                            const result = await generateResponse(incomingMessages);
+                            await sock.sendMessage(
+                            	senderNumber,
+                            	{ text: result + "\n\n" },
+                            	{ quoted: messages[0] },
+                            	2000
+                            );
+                    	}
                             break;
                     }
                    

@@ -4,6 +4,8 @@ const chalk = require('chalk')
 //prefix
 global.prefixAi = 'halo mirai'
 global.prefix = '-'
+global.botNumber = '6289503363001'
+global.ownerNumber = '6289509971381'
 
 //Bot theme media
 global.thumbnail = fs.readFileSync("./assets/mirails.jpg") //ur thumbnail pic
