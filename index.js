@@ -15,16 +15,15 @@ const axios = require('axios')
 //Bagian Koding ChatGPT
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: 'YOUR API KEY',
 });
 const openai = new OpenAIApi(configuration);
 
 //Fungsi OpenAI ChatGPT untuk Mendapatkan Respon
 async function generateResponse(text) {
-	var questions = text+"\n## Instructions \nUse the cute anime girl tsundere tone of voice."
     const response = await openai.createCompletion({
         model: "text-davinci-003",
-        prompt: `## Instructions \nUse the cute anime girl tsundere tone of voice.\n${text}`,
+        prompt: text,
         temperature: 0.3,
         max_tokens: 2000,
         top_p: 1.0,
