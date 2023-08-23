@@ -1,5 +1,5 @@
 # Mirai-Bot-OpenAi
-Mirai-Bot is WhatsApp Bot Using Baileys WhatsApp Web API and integrated with openai chat bot
+Mirai-Bot is WhatsApp Bot Using Baileys WhatsApp Web API and integrated with openai chat bot <br>
 Note: Check index copy.js for ori code index not modified
 
 # How To Use
