@@ -12,7 +12,7 @@ const { state, saveState } = useSingleFileAuthState("./login.json");
 //Bagian Koding ChatGPT
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: 'YOUR API KEY',
 });
 const openai = new OpenAIApi(configuration);
 
