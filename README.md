@@ -8,8 +8,9 @@ Mirai-Bot is WhatsApp Bot Using Baileys WhatsApp Web API and integrated with ope
 ```   
 npm install
 ```
-4. Run project in terminal
+4. Paste your api key openai in index.js
+5. Run project in terminal
 ```   
 npm start
 ```
-5. Scan barcode in terimal using your whatsapp application
+6. Scan barcode in terimal using your whatsapp application
